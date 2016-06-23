@@ -9,13 +9,76 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.cnandezv.touchgamebt.MainActivity">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player 1"
+        android:id="@+id/player1"
+        android:onClick="Click1"
+        android:visibility="visible"
+        android:minHeight="200dp"
+        android:minWidth="350dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textColor="#fff"
+        android:background="#00689b"
+        android:textSize="50dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player 2"
+        android:id="@+id/player2"
+        android:onClick="Click2"
+        android:visibility="visible"
+        android:minHeight="200dp"
+        android:minWidth="350dp"
+        android:layout_alignTop="@+id/player1"
+        android:layout_centerHorizontal="true"
+        android:textColor="#fff"
+        android:textSize="50dp"
+        android:background="#00689b" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Player 3"
+        android:id="@+id/player3"
+        android:onClick="Click3"
+        android:visibility="visible"
+        android:minWidth="350dp"
+        android:minHeight="200dp"
+        android:layout_alignTop="@+id/player2"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:background="#00689b"
+        android:textColor="#fff"
+        android:textSize="50dp" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Hola Mundo"
-        android:id="@+id/textView"
+        android:text="Vamo a apretar boton"
+        android:id="@+id/mytext3"
+        android:textColor="#00689b"
+        android:textSize="70dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_toLeftOf="@+id/player3"
+        android:layout_toStartOf="@+id/player3" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:id="@+id/buttong"
+        android:onClick="Winner"
+        android:minWidth="100dp"
+        android:minHeight="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="#fff"
+        android:background="#00689b" />
+
 </RelativeLayout>
 

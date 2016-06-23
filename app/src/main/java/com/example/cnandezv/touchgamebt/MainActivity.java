@@ -24,11 +24,71 @@ public class MainActivity extends AppCompatActivity {
 
     private ConnectedThread mConnectedThread;
 
+
     // SPP UUID service - this should work for most devices
     private static final UUID BTMODULEUUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB");
 
     // String for MAC address
     private static String address = null;
+
+    int count =0;
+    int count2 =0;
+    int count3 =0;
+
+    Handler handler = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            ++count;
+            TextView mytext = (TextView) findViewById(R.id.mytext);
+            mytext.setText(Integer.toString(count));
+        }
+    };
+
+    Handler handler2 = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            ++count2;
+            TextView mytext2 = (TextView) findViewById(R.id.mytext2);
+            mytext2.setText(Integer.toString(count2));
+        }
+    };
+
+    Handler handler3 = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            ++count3;
+            TextView mytext3 = (TextView) findViewById(R.id.mytext3);
+            mytext3.setText(Integer.toString(count3));
+        }
+    };
+
+    Handler Ocultar = new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            Button pl1 = (Button) findViewById(R.id.player1);
+            Button pl2 = (Button) findViewById(R.id.player2);
+            Button pl3 = (Button) findViewById(R.id.player3);
+            pl1.setVisibility(View.GONE);
+            pl2.setVisibility(View.GONE);
+            pl3.setVisibility(View.GONE);
+            if (count >= count2) {
+                if (count >= count3) {
+
+                    TextView mytext3 = (TextView) findViewById(R.id.mytext3);
+                    mytext3.setText("El ganador es el jugador 1");
+                }
+
+            } else {
+                if (count2 > count3) {
+                    TextView mytext3 = (TextView) findViewById(R.id.mytext3);
+                    mytext3.setText("El ganador es el jugador 2");
+                } else {
+                    TextView mytext3 = (TextView) findViewById(R.id.mytext3);
+                    mytext3.setText("El ganador es el jugador 3");
+                }
+            }
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,5 +224,102 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
+    }
+
+    public void Click1(View view)
+    {
+        Runnable r = new Runnable() {
+            @Override
+            public void run() {
+                long futureTime = System.currentTimeMillis()+1;
+                while (System.currentTimeMillis() < futureTime)
+                {
+                    synchronized (this){
+                        try{
+                            wait(futureTime - System.currentTimeMillis());
+                        } catch(Exception e){
+
+                        }
+                    }
+                }
+                handler.sendEmptyMessage(0);
+            }
+        };
+        Thread mythread = new Thread(r);
+        mythread.start();
+    }
+
+    public void Click2(View view2)
+    {
+        Runnable r2 = new Runnable() {
+            @Override
+            public void run() {
+                long futureTime = System.currentTimeMillis()+1;
+                while (System.currentTimeMillis() < futureTime)
+                {
+                    synchronized (this){
+                        try{
+                            wait(futureTime - System.currentTimeMillis());
+                        } catch(Exception e){
+
+                        }
+                    }
+                }
+                handler2.sendEmptyMessage(0);
+            }
+        };
+        Thread mythread2 = new Thread(r2);
+        mythread2.start();
+    }
+    public void Click3(View view3)
+    {
+        Runnable r3 = new Runnable() {
+            @Override
+            public void run() {
+                long futureTime = System.currentTimeMillis()+1;
+                while (System.currentTimeMillis() < futureTime)
+                {
+                    synchronized (this){
+                        try{
+                            wait(futureTime - System.currentTimeMillis());
+                        } catch(Exception e){
+
+                        }
+                    }
+                }
+                handler3.sendEmptyMessage(0);
+            }
+        };
+        Thread mythread3 = new Thread(r3);
+        mythread3.start();
+    }
+
+    public void Winner(View win){
+        Button pl1 = (Button) findViewById(R.id.player1);
+        Button pl2 = (Button) findViewById(R.id.player2);
+        Button pl3 = (Button) findViewById(R.id.player3);
+        pl1.setVisibility(View.VISIBLE);
+        pl2.setVisibility(View.VISIBLE);
+        pl3.setVisibility(View.VISIBLE);
+        Runnable w = new Runnable() {
+            @Override
+            public void run() {
+                long futureTime = System.currentTimeMillis()+10000;
+                while (System.currentTimeMillis() < futureTime)
+                {
+                    synchronized (this){
+                        try{
+                            wait(futureTime - System.currentTimeMillis());
+                        } catch(Exception e){
+
+                        }
+                    }
+                }
+                Ocultar.sendEmptyMessage(0);
+            }
+        };
+        Thread mythread = new Thread(w);
+        mythread.start();
+
     }
 }
